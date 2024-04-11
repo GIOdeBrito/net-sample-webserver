@@ -8,13 +8,20 @@ public class Startup
     public void ConfigureServices (IServiceCollection services)
     {
         services.AddControllersWithViews();
+        services.AddSession(options =>
+        {
+            // Session dies within 10 minutes of inactivity
+            options.IdleTimeout = TimeSpan.FromMinutes(10);
+        });
     }
 
     public void Configure (IApplicationBuilder app, IWebHostEnvironment env)
     {
+        app.UseSession();
+        
         /* Page not found default */
         app.UseExceptionHandler("/NotFound");
-        app.UseStatusCodePagesWithReExecute("/NotFound");
+        //app.UseStatusCodePagesWithReExecute("/NotFound");
         app.UseHsts();
 
         app.UseHttpsRedirection();
@@ -36,9 +43,9 @@ public class Startup
             );
 
             endpoints.MapControllerRoute(
-                name: "getTime",
-                pattern: "api/time",
-                defaults: new { controller = "Time", action = "GetTime" }
+                name: "apiRoute",
+                pattern: "api/{action}",
+                defaults: new { controller = "Api", action = "time" }
             );
         });
     }
