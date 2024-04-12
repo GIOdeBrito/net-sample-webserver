@@ -33,7 +33,7 @@ public class HomeController : Controller
 
         UserViewModel obj = new UserViewModel(userName, userAge);
 
-        //var obj = new { Name = userName, Age = userAge };
+        //object obj = new { Name = userName, Age = userAge };
         return View(obj);
     }
 }

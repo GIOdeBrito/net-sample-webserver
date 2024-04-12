@@ -28,6 +28,14 @@ public class Startup
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthorization();
+
+        // Enable CORS
+        app.UseCors(builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .WithMethods("GET", "POST");
+        });
         
         app.UseEndpoints(endpoints => 
         {
