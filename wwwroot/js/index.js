@@ -15,7 +15,7 @@ function controls ()
         window['result'].innerText = 'Current time: ' + json.result;
     };
 
-    window['buser'].onclick = async () =>
+    window['buser'].onclick = () =>
     {
         setUser();
     };
@@ -47,7 +47,7 @@ async function setUser ()
     req.open("POST", "/api/v2/setuser", true);
     req.setRequestHeader("Content-Type", "application/json");
 
-    let json = {
+    const json = {
         name: name,
         age: age
     };
@@ -59,7 +59,10 @@ async function setUser ()
         if(req.status === 200)
         {
             window.location.reload();
+            return;
         }
+
+        console.error(req.status);
     };
 }
 
