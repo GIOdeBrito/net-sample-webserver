@@ -25,7 +25,7 @@ async function timeRequest ()
 {
     const req = new XMLHttpRequest();
     
-    req.open("GET", "/api/time", true);
+    req.open("GET", "/api/v1/time", true);
     req.send();
 
     return new Promise(resolve =>
@@ -44,7 +44,7 @@ async function setUser ()
     let age = Number(window.prompt("Inform age"));
 
     const req = new XMLHttpRequest();
-    req.open("POST", "/api/setuser", true);
+    req.open("POST", "/api/v2/setuser", true);
     req.setRequestHeader("Content-Type", "application/json");
 
     let json = {

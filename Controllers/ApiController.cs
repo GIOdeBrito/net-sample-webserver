@@ -4,10 +4,17 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using UserView.Models;
 
-[Route("api")]
+[Route("api/v1")]
 [ApiController]
 public class ApiController : Controller
 {
+    [HttpGet("version")]
+    public IActionResult GetVersion ()
+    {
+        object json = new { action = "version", result = "V1" };
+        return StatusCode(200, json);
+    }
+    
     [HttpGet("time")]
     public IActionResult GetTime ()
     {
@@ -21,16 +28,37 @@ public class ApiController : Controller
         object json = new { action = "get_author", result = "Giordano de Brito" };
         return StatusCode(200, json);
     }
+}
+
+
+[Route("api/v2")]
+[ApiController]
+public class ApiControllerV2 : Controller
+{
+    [HttpGet("version")]
+    public IActionResult GetVersion ()
+    {
+        object json = new { action = "version", result = "V2" };
+        return StatusCode(200, json);
+    }
 
     [HttpPost("setuser")]
     public IActionResult SetCurrentUser ([FromBody] UserViewModel user)
     {
         UserViewModel itemUser = new UserViewModel(user.Name, user.Age);
 
-        // Set data on current session
-        HttpContext.Session.Set("CurrentUser", Encoding.UTF8.GetBytes(JsonSerializer.Serialize(itemUser)));
-        
-        object json = new { action = "set_user", result = "success" };
-        return StatusCode(200, json);
+        try
+        {
+            // Set data on current session
+            HttpContext.Session.Set("CurrentUser", Encoding.UTF8.GetBytes(JsonSerializer.Serialize(itemUser)));
+            
+            object json = new { action = "set_user", result = "success" };
+            return StatusCode(200, json);
+        }
+        catch(Exception ex)
+        {
+            object json = new { action = "set_user", error = ex.Message };
+            return StatusCode(500, json);
+        }
     }
 }
