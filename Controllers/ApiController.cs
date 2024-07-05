@@ -3,7 +3,7 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using UserView.Models;
-using ZipHelper.Create;
+//using ZipHelper.Create;
 
 [Route("api/v1")]
 public class ApiController : Controller
@@ -29,13 +29,13 @@ public class ApiController : Controller
         return StatusCode(200, json);
     }
 
-    [HttpGet("downloadprojectxml/{filename}")]
+    /*[HttpGet("downloadprojectxml/{filename}")]
     public IActionResult GetFile (string filename)
     {
         
         
         return File();
-    }
+    }*/
 }
 
 [Route("api/v2")]
