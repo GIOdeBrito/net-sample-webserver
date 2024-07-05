@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Project>
+    <Name>
+        Ugarit Transliterator
+    </Name>
+    
+    <Description>
+        A website that act as a transliterator and dictionary for Ugaritic words and terms.
+    </Description>
+    
+    <Author>
+        Giordano de Brito
+    </Author>
+    
+    <Technologies>
+        HTML5, CSS3, JavaScript, PHP.
+    </Technologies>
+</Project>

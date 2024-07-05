@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Project>
+    <Name>
+        .NET Demo Web Server
+    </Name>
+    
+    <Description>
+        A sample ASP.NET web server made with C# 8.0.
+    </Description>
+    
+    <Author>
+        Giordano de Brito
+    </Author>
+    
+    <Technologies>
+        HTML5, CSS3, JavaScript, C#.
+    </Technologies>
+</Project>

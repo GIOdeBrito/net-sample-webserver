@@ -3,9 +3,9 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using UserView.Models;
+using ZipHelper.Create;
 
 [Route("api/v1")]
-[ApiController]
 public class ApiController : Controller
 {
     [HttpGet("version")]
@@ -28,11 +28,17 @@ public class ApiController : Controller
         object json = new { action = "get_author", result = "Giordano de Brito" };
         return StatusCode(200, json);
     }
+
+    [HttpGet("downloadprojectxml/{filename}")]
+    public IActionResult GetFile (string filename)
+    {
+        
+        
+        return File();
+    }
 }
 
-
 [Route("api/v2")]
-[ApiController]
 public class ApiControllerV2 : Controller
 {
     [HttpGet("version")]

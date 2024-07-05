@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+    app:
+        image: main-net:latest
+        container_name: main-net-website
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "5000:8080"
+        tty: true

@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>CSharp Web :: Index</title>
+        <title>NET Web Site</title>
         <link rel="stylesheet" href="@Url.Content("~/css/theme.css")">
         <link rel="stylesheet" href="@Url.Content("~/css/index.css")">
         <script src="@Url.Content("~/js/index.js")"></script>
@@ -15,7 +15,7 @@
     <body>
         <main>
             <header>
-                <h1>Hello, I am @Model.Name. And I am currently @Model.Age years old.</h1>
+                <h1>Hello, @Model.Name is my name. I am currently @Model.Age years old.</h1>
             </header>
 
             <section>
@@ -26,6 +26,7 @@
                 <p>This page was served by the .NET application.</p>
                 <button id="btime">Get current time</button>
                 <button id="buser">Set user</button>
+                <button id="downloadxml">Download projects XML</button>
                 <p id="result"></p>
             </section>
         </main>
