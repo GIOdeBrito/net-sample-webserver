@@ -16,7 +16,7 @@ WORKDIR /app
 
 COPY --from=build /app/bin/Release/net8.0/ .
 
-COPY --from=build /app/wwwroot/ .
+COPY --from=build /app/wwwroot ./wwwroot
 
 EXPOSE 80
 

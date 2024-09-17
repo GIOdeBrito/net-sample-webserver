@@ -3,7 +3,7 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using UserView.Models;
-//using ZipHelper.Create;
+using ZipHelper.Create;
 
 [Route("api/v1")]
 public class ApiController : Controller
@@ -29,13 +29,20 @@ public class ApiController : Controller
         return StatusCode(200, json);
     }
 
-    /*[HttpGet("downloadprojectxml/{filename}")]
+    [HttpGet("downloadprojectxml/{filename}")]
     public IActionResult GetFile (string filename)
     {
-        
-        
-        return File();
-    }*/
+        string path = $"Common/Xml/{filename}.xml";
+
+        if(!System.IO.File.Exists(path))
+        {
+            return NotFound();
+        }
+
+        byte[] content = System.IO.File.ReadAllBytes(path);
+
+        return File(content, "application/xml", "project_ugarit");
+    }
 }
 
 [Route("api/v2")]
