@@ -1,4 +1,6 @@
 
+import httpreq from "./httpreq.js";
+import tryParseJson from "./json.parse.js";
 
 window.addEventListener('load', function ()
 {
@@ -7,35 +9,16 @@ window.addEventListener('load', function ()
 
 function controls ()
 {
-    window['btime'].onclick = async () =>
-    {
-        let res = await timeRequest();
-        let json = JSON.parse(res.response);
-
-        window['result'].innerText = 'Current time: ' + json.result;
-    };
-
-    window['buser'].onclick = () =>
-    {
-        setUser();
-    };
+    window['btime'].onclick = () => timeRequest();
+    window['buser'].onclick = () => setUser();
 }
 
 async function timeRequest ()
 {
-    const req = new XMLHttpRequest();
-    
-    req.open("GET", "/api/v1/time", true);
-    req.send();
+    let request = await httpreq("/api/v1/time");
+    let json = tryParseJson(request.response);
 
-    return new Promise(resolve =>
-    {
-        req.onload = (res) => resolve({
-            status: res.target.status,
-            response: res.target.responseText,
-            raw: res
-        });
-    });
+    window['result'].innerText = 'Current time: ' + json.result;
 }
 
 async function setUser ()
@@ -43,27 +26,20 @@ async function setUser ()
     let name = String(window.prompt("Inform name"));
     let age = Number(window.prompt("Inform age"));
 
-    const req = new XMLHttpRequest();
-    req.open("POST", "/api/v2/setuser", true);
-    req.setRequestHeader("Content-Type", "application/json");
-
-    const json = {
+    const obj = {
         name: name,
         age: age
     };
 
-    req.send(JSON.stringify(json));
+    let request = await httpreq("/api/v2/setuser", obj);
 
-    req.onload = () =>
+    if(request.status === 200)
     {
-        if(req.status === 200)
-        {
-            window.location.reload();
-            return;
-        }
+        window.location.reload();
+        return;
+    }
 
-        console.error(req.status);
-    };
+    console.error(request.response);
 }
 
 

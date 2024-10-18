@@ -40,20 +40,20 @@ public class Startup
         app.UseEndpoints(endpoints => 
         {
             endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}"
+            );
+            
+            endpoints.MapControllerRoute(
                 name: "notFound",
                 pattern: "notFound",
                 defaults: new { controller = "NotFound", action = "PageNotFound" }
             );
 
             endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}"
-            );
-
-            endpoints.MapControllerRoute(
                 name: "apiRoute",
-                pattern: "api/{action}",
-                defaults: new { controller = "Api", action = "time" }
+                pattern: "api/{version}/{action}",
+                defaults: new { controller = "Api", version = "v1", action = "time" }
             );
         });
     }

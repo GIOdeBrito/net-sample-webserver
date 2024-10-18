@@ -2,26 +2,22 @@
 This is a sample ASP.NET web server made with C# 8.0.
 
 ## Requirements
-- .NET SDK version 8.0
 - Docker
 - A Linux machine
 
-## .NET
-It is necessary to have the `dotnet` installed to build the application
-before copying it to the `docker` container.
-```bash
-sudo snap install dotnet-sdk --classic --channel=8.0
-```
-
-## Docker
-After having installed the `dotnet` SDK, now it is necessary to get the `docker`
-package installed as well.
-```bash
-sudo apt install docker.io
-```
-
 ## Running
-To start the server, simply execute this script on the terminal.
+To run the project first it is necessary to build it with docker.
 ```bash
-./start_web.sh
+sudo docker-compose build
+```
+
+After that, run the project.
+```bash
+sudo docker-compose up -d
+```
+
+## Logging
+The logs, messages and thrown errors, can be seen with a docker command.
+```bash
+sudo docker logs main-net-website
 ```

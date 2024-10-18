@@ -18,7 +18,10 @@ public class ApiController : Controller
     [HttpGet("time")]
     public IActionResult GetTime ()
     {
-        object json = new { action = "get_time", result = DateTime.UtcNow.ToString("HH:mm:ss") };
+        TimeZoneInfo timeZoneTime = TimeZoneInfo.FindSystemTimeZoneById("Central Brazilian Standard Time");
+        DateTime timeNow = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, timeZoneTime);
+        
+        object json = new { action = "get_time", result = timeNow.ToString("HH:mm:ss") };
         return StatusCode(200, json);
     }
 
